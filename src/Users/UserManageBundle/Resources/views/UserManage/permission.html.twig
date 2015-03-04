@@ -1,0 +1,520 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+{% block content %}
+<script language="javascript" type="text/javascript">
+  $(document).ready(function(){
+     
+   $('.checkpermission').click(function(){
+      var data_attr = $(this).data('attr');
+   if($(this).prop('checked') == true){
+        $('.'+data_attr).each(function() {
+            $('.'+data_attr).prop("checked", true);
+        });
+      }else{          
+          $('.'+data_attr).each(function() {           
+              $('.'+data_attr).prop("checked", false);
+          });
+      }  
+    });
+    
+  
+    
+  /*  $("#selectall_agentlist").click(function () {
+          $('.checkpermission').attr('checked', this.checked);
+    });
+ 
+    $(".checkpermission").click(function(){
+      alert($(".checkpermission:checked").length);
+        if($(".checkpermission").length == $(".checkpermission:checked").length) {
+            $("#selectall_agentlist").attr("checked", "checked");
+        } else {
+            $("#selectall_agentlist").removeAttr("checked");
+        }
+ 
+    });
+
+ }); */
+   /*
+     $("#selectall_admin_settings").click(function(){
+      $(".check_admin_settings").prop("checked",$("#selectall_admin_settings").prop("checked"))
+    }); 
+    */
+  });
+</script>
+<div class="mid-section">
+    {# Including Side Bar  #}
+    {% include "UsersUserManageBundle::sidebar.html.twig" %}
+  <div class="right-panel">
+    <div class="heading">
+    <h1>Permissions</h1>
+    </div>
+    <form action = "{{path('permission')}}" method = "post"  >
+      <div class="form-box">  
+            {# Agent List Block#}
+            <div class="form-head">
+              <input name="check['agent_list']['main']" type="checkbox" value="1" id="selectall_agentlist" data-attr="agent" class = "checkpermission"  {% if ( agent_list_main is defined and agent_list_main == 1) %} checked {% endif %}>&nbsp;<label for="selectall_agentlist">Agent </label>
+            </div>      
+            <div class="col">
+              <div class="form-control">                 
+                 <input name="check['agent_list']['add_agent']" id = "add_agent" type="checkbox" value="1" class = "agent checkpermission" {% if ( agent_list_add_agent is defined and agent_list_add_agent == 1) %} checked {% endif %} >
+                 <label for = "add_agent">Add Agent</label>
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['agent_list']['show_kr_clients']" type="checkbox" value="1" class = "agent checkpermission" {% if ( agent_list_show_kr_clients is defined and agent_list_show_kr_clients == 1) %} checked {% endif %}>
+                Show KR Clients
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['agent_list']['show_agent_list']" type="checkbox" value="1" class = "agent checkpermission" {% if ( agent_list_show_agent_list is defined and agent_list_show_agent_list == 1) %} checked {% endif %}>
+                Show Agent list
+                <div class="clear"></div>
+              </div>             
+            </div>
+            <div class="col">
+              <div class="form-control">
+                <input name="check['agent_list']['welcome_letter']" type="checkbox" value="1" class = "agent checkpermission" {% if ( agent_list_welcome_letter is defined and agent_list_welcome_letter == 1) %} checked {% endif %}>
+                Welcome Letter
+                <div class="clear"></div>
+              </div>            
+           
+              <div class="form-control">
+                <input name="check['agent_list']['show_was_clients']" type="checkbox" value="1" class = "agent checkpermission" {% if ( agent_list_show_was_clients is defined and agent_list_show_was_clients == 1) %} checked {% endif %}>
+                Show WAS clients
+                <div class="clear"></div>
+              </div>            
+           
+              <div class="form-control">
+                <input name="check['agent_list']['account_list']" type="checkbox" value="1" class = "agent checkpermission" {% if ( agent_list_account_list is defined and agent_list_account_list == 1) %} checked {% endif %}>
+                Show Account List
+                <div class="clear"></div>
+              </div>            
+            </div>          
+            <div class="clear"></div>
+            
+            <div class="form-head">
+              <input name="check['mortgage_broker_list']['main']" type="checkbox" value="1" id = "selectall_mortgagelist" data-attr="mortgage_broker" class= "checkpermission check_mortgage_permission" {% if ( mortgage_broker_list_main is defined and mortgage_broker_list_main == 1) %} checked {% endif %}>&nbsp;<label for="selectall_mortgagelist">Mortgage Broker</label>
+            </div>
+          <div class="col">
+            <div class="form-control">
+              <input name="check['mortgage_broker_list']['add_mortgage_broker']" type="checkbox" value="1" class= "mortgage_broker check_mortgage_permission" {% if ( mortgage_broker_list_add_mortgage_broker is defined and mortgage_broker_list_add_mortgage_broker == 1) %} checked {% endif %}>
+              Add Mortgage Broker
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-control">
+              <input name="check['mortgage_broker_list']['show_mortgage_broker_list']" type="checkbox" value="1" class= "mortgage_broker check_mortgage_permission"  {% if ( mortgage_broker_list_show_mortgage_broker_list is defined and mortgage_broker_list_show_mortgage_broker_list == 1) %} checked {% endif %}>
+               Show Mortgage Broker List
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-control">
+              <input name="check['mortgage_broker_list']['welcome_letter']" type="checkbox" value="1" class= "mortgage_broker check_mortgage_permission"  {% if ( mortgage_broker_list_welcome_letter is defined and mortgage_broker_list_welcome_letter == 1) %} checked {% endif %}>
+              Welcome Letter
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="form-head"><input name="check['site_list']['main']" type="checkbox" value="1" id = "selectall_sitelist" data-attr= "site" class = "checkpermission check_site_permission" {% if ( site_list_main is defined and site_list_main == 1) %} checked {% endif %}>&nbsp;<label for="selectall_sitelist">Site List</label></div>
+            <div class="col">
+              <div class="form-control">
+                <input name="check['site_list']['add_site']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_add_site is defined and site_list_add_site == 1) %} checked {% endif %}>
+                Add Site
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                  <input name="check['site_list']['new_custom_template']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_new_custom_template is defined and site_list_new_custom_template == 1) %} checked {% endif %}>
+                  New Custom Template
+                  <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['site_list']['new_property_template']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_new_property_template is defined and site_list_new_property_template == 1) %} checked {% endif %}>
+                  New Property Template
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['site_list']['add_focus']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_add_focus is defined and site_list_add_focus == 1) %} checked {% endif %}>
+                    Add Focus Site
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-control">
+                <input name="check['site_list']['add_theme_template']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_add_focus is defined and site_list_add_focus == 1) %} checked {% endif %}>
+                  Add Theme Template
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['site_list']['site_visitor_and_form_states']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_site_visitor_and_form_states is defined and site_list_site_visitor_and_form_states == 1) %} checked {% endif %}>
+                Site Visitor & Form Stats
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['site_list']['list_theme_templates']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_list_theme_templates is defined and site_list_list_theme_templates == 1) %} checked {% endif %}>
+                  List Theme Templates
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-control">
+                <input name="check['site_list']['list_custom_templates']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_list_custom_templates is defined and site_list_list_custom_templates == 1) %} checked {% endif %}>
+                List Custom Templates
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['site_list']['client_custom_focus_site']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_client_custom_focus_site is defined and site_list_client_custom_focus_site == 1) %} checked {% endif %}>
+                  Client Custom Focus Site
+                <div class="clear"></div>
+              </div>
+              <div class="form-control">
+                <input name="check['site_list']['list_focus_sites']" type="checkbox" value="1" class = "site check_site_permission" {% if ( site_list_list_focus_sites is defined and site_list_list_focus_sites == 1) %} checked {% endif %}>
+                  List Focus Sites
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="clear"></div>
+            <div class="form-head"><input name="check['default_agent_settings']['main']" type="checkbox" value="1" id= "selectall_default_agent_settings" data-attr = "default_agent_settings" class = "checkpermission check_default_agent_setting_permission" {% if ( default_agent_settings_main is defined and default_agent_settings_main == 1) %} checked {% endif %}>&nbsp;<label for = "selectall_default_agent_settings">Default Agent Settings</label></div>
+              <div class="col">
+                <div class="form-control">
+                  <input name="check['default_agent_settings']['default_html_headers']" type="checkbox" value="1" class = "default_agent_settings check_default_agent_setting_permission"{% if ( default_agent_settings_default_html_headers is defined and default_agent_settings_default_html_headers == 1) %} checked {% endif %}>
+                  Default HTML Headers
+                  <div class="clear"></div>
+                </div>
+                <div class="form-control">
+                  <input name="check['default_agent_settings']['default_signatures']" type="checkbox" value="1" class = "default_agent_settings check_default_agent_setting_permission" {% if ( default_agent_settings_default_signatures is defined and default_agent_settings_default_signatures == 1) %} checked {% endif %}>
+                  Default Signatures
+                  <div class="clear"></div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-control">
+                  <input name="check['default_agent_settings']['add_agent_html_hdr']" type="checkbox" value="1" class = "default_agent_settings check_default_agent_setting_permission" {% if ( default_agent_settings_add_agent_html_hdr is defined and default_agent_settings_add_agent_html_hdr == 1) %} checked {% endif %}>
+                    Add Agent HTML Hdr
+                  <div class="clear"></div>
+                </div>               
+              </div>
+               <div class="col">
+                 <div class="form-control">
+                  <input name="check['default_agent_settings']['add_agent_signature']" type="checkbox" value="1" class = "default_agent_settings check_default_agent_setting_permission" {% if ( default_agent_settings_add_agent_signature is defined and default_agent_settings_add_agent_signature == 1) %} checked {% endif %}>
+                  Add Agent Signature
+                  <div class="clear"></div>
+                </div>               
+              </div>
+              <div class="clear"></div>
+              <div class="form-head"><input name="check['follow_up_camp']['main']" type="checkbox" value="1" data-attr= "follow_up_camp" class = "checkpermission check_follow_up_camp" id= "selectall_follow_up_camp" {% if ( follow_up_camp_main is defined and follow_up_camp_main == 1) %} checked {% endif %}>&nbsp;Follow Up Camp.</div>
+              <div class="col">
+                <div class="form-control">
+                  <input name="check['follow_up_camp']['add_campaign_email']" type="checkbox" value="1" class = "follow_up_camp check_follow_up_camp" {% if ( follow_up_camp_add_campaign_email is defined and follow_up_camp_add_campaign_email == 1) %} checked {% endif %}>
+                  Add Campaign Email
+                  <div class="clear"></div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-control">
+                  <input name="check['follow_up_camp']['list_email_templates']" type="checkbox" value="1" class = "follow_up_camp check_follow_up_camp" {% if ( follow_up_camp_list_email_templates is defined and follow_up_camp_list_email_templates == 1) %} checked {% endif %}>
+                   List Email Templates
+                  <div class="clear"></div>
+                </div>
+              </div>
+              <div class="clear"></div>
+                <div class="form-head"><input name="check['email_blast']['main']" type="checkbox" value="1" data-attr = "email_blast" class= "checkpermission check_email_blast" id = "selectall_email_blast" {% if ( email_blast_main is defined and email_blast_main == 1) %} checked {% endif %}>&nbsp;Email Blast</div>
+                <div class="col">
+                  <div class="form-control">
+                    <input name="check['email_blast']['send_to_all_agents']" type="checkbox" value="1" class= "email_blast check_email_blast" {% if ( email_blast_send_to_all_agents is defined and email_blast_send_to_all_agents == 1) %} checked {% endif %}>
+                    Send to All Agents
+                    <div class="clear"></div>
+                  </div>                  
+                </div>
+                <div class="col">
+                  <div class="form-control">
+                    <input name="check['email_blast']['send_individual_email']" type="checkbox" value="1" class= "email_blast check_email_blast" {% if ( email_blast_send_individual_email is defined and email_blast_send_individual_email == 1) %} checked {% endif %}>
+                      Send Individual Email
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-control">
+                    <input name="check['email_blast']['manage_default_grps']" type="checkbox" value="1" class= "email_blast check_email_blast" {% if ( email_blast_manage_default_grps is defined and email_blast_manage_default_grps == 1) %} checked {% endif %}>
+                      Manage Default Grps
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                <div class="clear"></div>
+                <div class="form-head"><input name="check['newsletters']['main']" type="checkbox" value="1" data-attr= "newsletters" class = "checkpermission check_newsletter" id ="selectall_newsletter" {% if ( newsletters_main is defined and newsletters_main == 1) %} checked {% endif %}>&nbsp;<label for = "selectall_newsletter">Newsletters</label></div>
+                <div class="col">
+                  <div class="form-control">
+                    <input name="check['newsletters']['add_newsletter']" type="checkbox" value="1" class = "newsletters check_newsletter" {% if ( newsletters_add_newsletter is defined and newsletters_add_newsletter == 1) %} checked {% endif %}>
+                    Add Newsletter
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-control">
+                    <input name="check['newsletters']['newsletter_defaults']" type="checkbox" value="1" class = "newsletters check_newsletter" {% if ( newsletters_newsletter_defaults is defined and newsletters_newsletter_defaults == 1) %} checked {% endif %}>
+                    Newsletter Defaults
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                <div class="clear"></div>
+                <div class="form-head"><input name="check['statistics']['main']" type="checkbox" value="1" data-attr= "statistics" class = "checkpermission check_statistics" id = "selectall_statistics" {% if ( statistics_main is defined and statistics_main == 1) %} checked {% endif %}>&nbsp;<label for ="selectall_statistics">Statistics</label></div>
+                <div class="col">
+                  <div class="form-control">
+                    <input name="check['statistics']['bulk_outgoing_emails']" type="checkbox" value="1" class = "statistics check_statistics" {% if ( statistics_bulk_outgoing_emails is defined and statistics_bulk_outgoing_emails == 1) %} checked {% endif %}>
+                    Bulk Outgoing Emails
+                    <div class="clear"></div>
+                  </div>                 
+                </div>
+                <div class="col">
+                  <div class="form-control">
+                    <input name="check['statistics']['virtual_tour_space']" type="checkbox" value="1" class = "statistics check_statistics" {% if ( statistics_virtual_tour_space is defined and statistics_virtual_tour_space == 1) %} checked {% endif %}>
+                    Virtual Tour Space
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                 <div class="col">
+                   <div class="form-control">
+                    <input name="check['statistics']['ip_blocking']" type="checkbox" value="1" class = "statistics check_statistics" {% if ( statistics_ip_blocking is defined and statistics_ip_blocking == 1) %} checked {% endif %}>
+                    IP Blocking
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                <div class="clear"></div>
+                  <div class="form-head"><input name="check['default_surveys']['main']" type="checkbox" data-attr= "default_surveys" value="1" class = "checkpermission check_default_surveys" id ="selectall_default_surveys" {% if ( default_surveys_main is defined and default_surveys_main == 1) %} checked {% endif %}>&nbsp;<label for = "selectall_default_surveys">Default Surveys</label></div>
+                  <div class="col">
+                    <div class="form-control">
+                    <input name="check['default_surveys']['add_default_survey']" type="checkbox" value="1" class = "default_surveys check_default_surveys" {% if ( default_surveys_add_default_survey is defined and default_surveys_add_default_survey == 1) %} checked {% endif %}>
+                     Add Default Survey
+                    <div class="clear"></div>
+                    </div>
+                  </div>
+                  <div class="clear"></div>
+                  <div class="form-head"><input name="check['documents']['main']" type="checkbox" value="1" data-attr= "documents" class = "checkpermission check_documents" id ="selectall_document" {% if ( documents_main is defined and documents_main == 1) %} checked {% endif %}>&nbsp;<label for = "selectall_document">Documents</label></div>
+                  <div class="col">
+                    <div class="form-control">
+                    <input name="check['documents']['add_document']" type="checkbox" value="1" class = "documents check_documents" {% if ( documents_add_document is defined and documents_add_document == 1) %} checked {% endif %}>
+                     Add Document
+                    <div class="clear"></div>
+                    </div>
+                  </div>              
+                  <div class="clear"></div>
+                   <div class="form-head"><input name="check['form_templates']['main']" type="checkbox" value="1" data-attr= "form_templates" class = "checkpermission check_form_templates" id ="selectall_form_templates" {% if ( form_templates_main is defined and form_templates_main == 1) %} checked {% endif %}>&nbsp;<label for = "selectall_form_templates">Form Templates</label></div>
+                   <div class="col">
+                    <div class="form-control">
+                    <input name="check['form_templates']['add_form_templates']" type="checkbox" value="1" class = "form_templates check_form_templates" {% if ( form_templates_add_form_templates is defined and form_templates_add_form_templates == 1) %} checked {% endif %}>
+                     Add Form Templates
+                    <div class="clear"></div>
+                    </div>
+                  </div>
+                   <div class="col">
+                    <div class="form-control">
+                    <input name="check['form_templates']['list_form_templates']" type="checkbox" value="1" class = "form_templates check_form_templates" {% if ( form_templates_list_form_templates is defined and form_templates_list_form_templates == 1) %} checked {% endif %}>
+                     List Form Templates
+                    <div class="clear"></div>
+                    </div>
+                  </div>
+                  <div class="clear"></div>                  
+                    <div class="form-head">
+                      <input name="check['idx_setup_items']['main']" type="checkbox" value="1" id="selectall_idx_setup" data-attr = "idx_setup_items" class = "checkpermission check_idx_setup" {% if ( idx_setup_items_main is defined and idx_setup_items_main == 1) %} checked {% endif %}>&nbsp;<label for="selectall_idx_setup">IDX Setup Items</label></div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['idx_setup_items']['idx_feed_template']" type="checkbox" value="1" class = "idx_setup_items check_idx_setup" {% if ( idx_setup_items_idx_feed_template is defined and idx_setup_items_idx_feed_template == 1) %} checked {% endif %}>
+                          IDX Feed Template
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['idx_setup_items']['idx_reports']" type="checkbox" value="1" class = "idx_setup_items check_idx_setup" {% if ( idx_setup_items_idx_reports is defined and idx_setup_items_idx_reports == 1) %} checked {% endif %}>
+                        IDX Reports
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['idx_setup_items']['edit_alert_mail']" type="checkbox" value="1" class = "idx_setup_items check_idx_setup" {% if ( idx_setup_items_edit_alert_mail is defined and idx_setup_items_edit_alert_mail == 1) %} checked {% endif %}>
+                          Edit Alert Mail
+                        <div class="clear"></div>
+                      </div>                     
+                    </div>
+                    <div class="col">
+                       <div class="form-control">
+                        <input name="check['idx_setup_items']['edit_viewing_sche_mail']" type="checkbox" value="1" class = "idx_setup_items check_idx_setup" {% if ( idx_setup_items_edit_viewing_sche_mail is defined and idx_setup_items_edit_viewing_sche_mail == 1) %} checked {% endif %}>
+                        Edit Viewing Sche. Mail
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-head">
+                      <input name="check['transfer_process']['main']" type="checkbox" value="1" id="selectall_transfer_process" data-attr= "transfer_process" class = "checkpermission check_transfer_process" {% if ( transfer_process_main is defined and transfer_process_main == 1) %} checked {% endif %}>&nbsp;<label for="selectall_agentlist"> Transfer Process</label></div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['transfer_process']['apg_db_transfer']" type="checkbox" value="1" class = "transfer_process check_transfer_process" {% if ( transfer_process_apg_db_transfer is defined and transfer_process_apg_db_transfer == 1) %} checked {% endif %}>
+                          APG - DB Transfer
+                        <div class="clear"></div>
+                      </div>                
+                    </div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['transfer_process']['focus_site_transfer']" type="checkbox" value="1" class = "transfer_process check_transfer_process" {% if ( transfer_process_focus_site_transfer is defined and transfer_process_focus_site_transfer == 1) %} checked {% endif %}>
+                         Focus Site Transfer
+                        <div class="clear"></div>
+                      </div>                  
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-head">
+                      <input name="check['site_setup_items']['main']" type="checkbox" value="1" id="selectall_site_setup_items" data-attr= "site_setup_items" class = "checkpermission check_site_setup_items" {% if ( site_setup_items_main is defined and site_setup_items_main == 1) %} checked {% endif %}>&nbsp;<label for="selectall_site_setup_items"> Site Setup Items</label></div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['admin_log']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_admin_log is defined and site_setup_items_admin_log == 1) %} checked {% endif %}>
+                          Admin Log
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['admin_auto_scan_report']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_admin_auto_scan_report is defined and site_setup_items_admin_auto_scan_report == 1) %} checked {% endif %}>
+                          Admin Auto Scan Report
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['list_report_templates']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_list_report_templates is defined and site_setup_items_list_report_templates == 1) %} checked {% endif %}>
+                           List Report Templates
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['popup_windows']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_popup_windows is defined and site_setup_items_popup_windows == 1) %} checked {% endif %}>
+                          Popup Windows
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['add_report']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_add_report is defined and site_setup_items_add_report == 1) %} checked {% endif %}>
+                         Add Report
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['auto_scan_settings']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_auto_scan_settings is defined and site_setup_items_auto_scan_settings == 1) %} checked {% endif %}>
+                         Auto Scan Settings
+                        <div class="clear"></div>
+                      </div>   
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['add_external_link']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_add_external_link is defined and site_setup_items_add_external_link == 1) %} checked {% endif %}>
+                        Add External Link
+                        <div class="clear"></div>
+                      </div>  
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['add_form']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_add_form is defined and site_setup_items_add_form == 1) %} checked {% endif %}>
+                         Add Form
+                        <div class="clear"></div>
+                      </div>  
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['list_forms']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_list_forms is defined and site_setup_items_list_forms == 1) %} checked {% endif %}>
+                         List Forms
+                        <div class="clear"></div>
+                      </div>  
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['default_form_groups']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_default_form_groups is defined and site_setup_items_default_form_groups == 1) %} checked {% endif %}>
+                         Default Form Groups
+                        <div class="clear"></div>
+                      </div>             
+                    </div>
+                    <div class="col">
+                       <div class="form-control">
+                        <input name="check['site_setup_items']['default_meta_tags']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_default_meta_tags is defined and site_setup_items_default_meta_tags == 1) %} checked {% endif %}>
+                         Default Meta Tags
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['property_lists_options']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_property_lists_options is defined and site_setup_items_property_lists_options == 1) %} checked {% endif %}>
+                         Property Lists Options
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['add_framed_report']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_add_framed_report is defined and site_setup_items_add_framed_report == 1) %} checked {% endif %}>
+                          Add Framed Report
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['site_setup_items']['add_custom_page']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_add_custom_page is defined and site_setup_items_add_custom_page == 1) %} checked {% endif %}>
+                           Add Custom Page
+                        <div class="clear"></div>
+                      </div>
+                       <div class="form-control">
+                        <input name="check['site_setup_items']['edit_light_dark_footer']" type="checkbox" value="1" class = "site_setup_items check_site_setup_items" {% if ( site_setup_items_edit_light_dark_footer is defined and site_setup_items_edit_light_dark_footer == 1) %} checked {% endif %}>
+                           Edit Light/Dark Footer
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                     <div class="clear"></div>
+                    <div class="form-head">
+                      <input name="check['admin_settings']['main']" type="checkbox" value="1" id="selectall_admin_settings" data-attr = "admin_settings" class = "checkpermission check_admin_settings" {% if ( admin_settings_main is defined and admin_settings_main == 1) %} checked {% endif %}>&nbsp;<label for="selectall_admin_settings" >Admin Settings</label>
+                    </div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['admin_settings']['list_admin_signatures']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_list_admin_signatures is defined and admin_settings_list_admin_signatures == 1) %} checked {% endif %}>
+                        List Admin Signatures
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['admin_settings']['add_admin_signature']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_add_admin_signature is defined and admin_settings_add_admin_signature == 1) %} checked {% endif %}>
+                        Add Admin Signature
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['admin_settings']['manage_admin_users']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_manage_admin_users is defined and admin_settings_manage_admin_users == 1) %} checked {% endif %}>
+                        Manage Admin Users
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['admin_settings']['manage_admin_logs']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_manage_admin_logs is defined and admin_settings_manage_admin_logs == 1) %} checked {% endif %}>
+                          Manage Admin Logs
+                        <div class="clear"></div>
+                      </div>                      
+                    </div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['admin_settings']['education_tab_settings']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_education_tab_settings is defined and admin_settings_education_tab_settings == 1) %} checked {% endif %}>
+                        Education Tab Settings
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['admin_settings']['focus_site_tab_settings']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_focus_site_tab_settings is defined and admin_settings_focus_site_tab_settings == 1) %} checked {% endif %}>
+                         Focus Site Tab Settings
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['admin_settings']['change_page_contents']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_change_page_contents is defined and admin_settings_change_page_contents == 1) %} checked {% endif %}>
+                         Change Page Contents 
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['admin_settings']['update_pop_content']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_update_pop_content is defined and admin_settings_update_pop_content == 1) %} checked {% endif %}>
+                        Update Pop Content  
+                        <div class="clear"></div>
+                      </div>                   
+                    </div>
+                    <div class="col">
+                      <div class="form-control">
+                        <input name="check['admin_settings']['property_detail_text']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_property_detail_text is defined and admin_settings_property_detail_text == 1) %} checked {% endif %}>
+                         Property Detail Text
+                        <div class="clear"></div>
+                      </div> 
+                      <div class="form-control">
+                        <input name="check['admin_settings']['domain_forwarding']" type="checkbox" value="1" class = "admin_settings check_admin_settings" {% if ( admin_settings_domain_forwarding is defined and admin_settings_domain_forwarding == 1) %} checked {% endif %}>
+                          Domain Forwarding
+                        <div class="clear"></div>
+                      </div>
+                      <div class="form-control">
+                        <input name="check['admin_settings']['crawlers']" type="checkbox" value="1" class = "admin_settings check_admin_settings" id = "showWASclients" {% if ( admin_settings_crawlers is defined and admin_settings_crawlers == 1) %} checked {% endif %}>
+                          Crawlers
+                        <div class="clear"></div>
+                      </div>
+                      <input type= "hidden" name= "action" {% if ( action is defined ) %} value={{action}} {% endif %}>
+                    </div>
+                    <div class="clear"></div>              
+                  <div align="right" style="padding-right:20px;"><input type="hidden" name="reseller_id" value={{id}}><input name="" type="submit" class="btn" value="Submit"></div>
+      </div>
+      <div class="clear" style='height:20px;'></div>
+    </form>
+  </div>
+</div>
+ <div class="footer">© 2014 All Rights Reserved</div>
+{% endblock %}

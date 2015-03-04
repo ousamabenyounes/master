@@ -1,0 +1,8 @@
+# src/Users/UserManageBundle/Resources/config/services.yml
+parameters:
+    my_mailer.transport:  sendmail
+
+services:
+    my_mailer:
+        class:        Users\UserManageBundle\DependencyInjection\Test
+        arguments:    ["%my_mailer.transport%"]

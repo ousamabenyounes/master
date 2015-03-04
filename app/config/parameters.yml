@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: agentpanelpro.cqdryledgmly.us-west-2.rds.amazonaws.com
+    database_port: 3306
+    database_name: agent_panel_pro
+    database_user: agentpanelpro
+    database_password: agentpanelpro
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: sachin.agarwal.aws@gmail.com
+    mailer_password: sachin#123
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt

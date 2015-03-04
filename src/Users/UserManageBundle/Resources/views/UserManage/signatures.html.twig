@@ -1,0 +1,119 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/bootstrap.css') }}" />
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/bootstrap.js') }}"></script>
+<div class="mid-section">
+ {# Including Side Bar  #}
+  {% include "UsersUserManageBundle::sidebar.html.twig" %}
+   <div class="right-panel">
+<div class="form-box">
+      <div  id = 'errors' class='alert alert-success hide'></div>
+        <div class="form-head add-agents-btn no_left_padding" >
+           <div >
+             <ul>          
+               <li ><a href="#" data-search_attr='1' class='signature_tab_search default_tab' >Show Active</a></li>
+               <li><a href="#" data-search_attr='2' class='signature_tab_search' >Show Inactive</a></li>          
+               <li><a href="#" data-search_attr='3' class='signature_tab_search' >Show All</a></li>
+             </ul>
+           </div> 
+            <div class="padding_left_741px">
+              <ul>
+                <li class="add_signature"><a href="{{path('manage_signature')}}" >Add New Signature</a></li>            
+              </ul>
+            </div>          
+            <div class="clear"></div>
+        </div>        
+        
+        <div class="data-table-wraper" id = 'signature_list'></div>
+        <div class="clear"></div>
+      </div>   
+   </div>
+</div>
+
+ <!--  End Mid-section Code-->
+  <div class="footer">© 2014 All Rights Reserved</div>
+    <script language="javascript" type="text/javascript">
+     var selected_tab = '1';
+        $(document).ready(function(){
+              list_signatures( selected_tab );
+              
+              $('.signature_tab_search').click(function(){
+          
+              $('.signature_tab_search').removeClass('selected_tab').addClass('signature_tab_search');	
+              $(this).addClass('selected_tab');						
+              selected_tab = $(this).data('search_attr');			
+              list_signatures(selected_tab);
+              
+              });
+              
+              $(document).on("click",".inactive_signature", function() {
+                 var signature_id = $(this).data('signature_id');
+                  get_model_box(signature_id);
+              });
+			  
+			   $(document).on("click",".active_signature", function() {
+                 var signature_id = $(this).data('signature_id');
+                  get_model_active_box(signature_id);
+              });
+              
+            $(document).on( "click","#inactive_button", function(){
+            var inactive_id = $('#inactive_id').val();
+           inactive_signature(inactive_id);
+       });
+          
+       });
+       
+       
+       function inactive_signature(inactive_id) {
+         var data = { 'id': inactive_id };
+         $.ajax({
+           url: '{{path("inactive_signature")}}',
+           type: 'POST',
+           data: data,
+           dataType: 'json',
+           beforeSend: function() {
+                $('#signature_list').html('<div class="dvLoading">&nbsp;</div>');
+           },
+           sucess: function(data) {
+           },
+            error: function() {
+              $('#signature_list').html('Currently we are unable to process your request');
+          },
+          complete: function() {
+          }           
+         });
+       }
+    function get_model_box(signature_id){
+    var model_box = "<div id='myModal' class='modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><input type='hidden' name='inactive_id' id='inactive_id' value="+signature_id+"><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button><h3 id='myModalLabel'>Inactive Signature</h3></div><div class='modal-body'><p>Are you sure to inactive the Signature?</p></div><div class='modal-footer'><button class='btn' data-dismiss='modal' aria-hidden='true'>Cancel</button><button class='btn btn-danger' id='inactive_button' data-dismiss='modal'>Yes</button></div></div>";
+    $("#myModal").html(model_box);
+  }
+       
+       function list_signatures(selected_tab){		
+		 var search_params = {
+							  'selected_tab' : selected_tab,
+							  'status'       : '1',
+							  
+							 };
+		 					 
+		 $.ajax({
+          url: '{{path("signatures")}}',
+          type: 'POST',
+          data: search_params,
+          dataType: 'html',		 
+          beforeSend: function() {
+             $('#signature_list').html('<div class="dvLoading">&nbsp;</div>');                        
+          },
+          success: function( data,status ) {   
+             $('#signature_list').html(data);
+          },
+          error: function() {
+              $('#signature_list').html('Currently we are unable to process your request');
+          },
+          complete: function() {
+          }
+        });
+	}
+    </script>
+  {% endblock %}
+  

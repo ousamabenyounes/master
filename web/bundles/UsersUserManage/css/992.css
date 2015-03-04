@@ -1,0 +1,19 @@
+.right-panel { margin-left:291px;}
+.left-menu-section { left:0px;}
+.header .masagebox{ display:block;}
+.col { 
+float:left; 
+width:36%;
+
+}
+.form-control label{ 
+  *float:left;   
+  width:40%;
+}
+.form-control .ui-ctrl{ 
+  width:60%; 
+  float:right;
+}
+.mobile-tab{ display:none;}
+.left-menu-section{ top:0;}
+.mobile-tab{ top:0;}

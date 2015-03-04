@@ -1,0 +1,35 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>   
+      <th scope="col">Last Name</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Email</th>
+	  <th scope="col" class = "fix_width">Date Added</th>
+      <th scope="col"  class = "fix_width">Action</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+   {% for reseller in resellers %}
+	  <tr>		
+		<td> {{ reseller.lastName|striptags|slice(0, 20) }}</td>
+		<td> {{ reseller.firstName|striptags|slice(0, 20) }}</td>
+		<td>{{ reseller.email|striptags|slice(0, 35) }}</td>
+		<td class = "text_center"> {{ reseller.createdOn|date("m/d/Y") }}</td>
+		<td>
+            <a href = "{{path('_loginas')}}/{{reseller.id}}"><img src="{{ asset('bundles/UsersUserManage/images/login-icon.png') }}" width="25" height="20" title='Login as reseller'></a>            
+            <a href = "{{path('resellerinfo')}}/{{reseller.id}}"  title='Edit reseller'>
+              <img src="{{ asset('bundles/UsersUserManage/images/edit-icon-u.png') }}" width="25" height="20"> 
+            </a>
+              <span class="glyphicon glyphicon-remove"></span>
+              <img class="delete_reseller" src="{{ asset('bundles/UsersUserManage/images/delete-icon.png') }}" width="25" height="20" data-toggle="modal" data-target="#myModal" data-reseller_id = "{{reseller.id}}" title='Inactivate reseller'>
+            <a href = "{{path('permission')}}/{{reseller.id}}" >
+              <img src="{{ asset('bundles/UsersUserManage/images/edit-icon-u.png') }}" width="25" height="20"  title='Reseller permissions'>
+            </a>
+     </td>
+	  </tr>
+  {% endfor %}
+  </tbody>  
+</table>
+{% include "UsersUserManageBundle::pagination.html.twig" %}
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

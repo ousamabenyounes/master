@@ -1,0 +1,40 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+ <thead>
+    <tr>   
+      <th scope="col">Company</th>
+      <th scope="col">Address</th>     
+      <th scope="col">Email</th>
+       <th scope="col" width="11%">Phone</th>
+      <th scope="col" width="11%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for flashMessage in app.session.flashbag.get('no_record_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('no_record_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+   {% for flashMessage in app.session.flashbag.get('record_insert_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+     {% for flashMessage in app.session.flashbag.get('record_update_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+    <tr ><td colspan='5' class = 'no_record_message' style= 'display:none'></td></tr>
+   {% for account in accounts %}
+	  <tr>		
+		<td> {{ account.name }}</td>
+		<td> {{ account.address|striptags|slice(0, 15)~ '...'}},{{account.city}},{{account.state_entity.name}}</td>		
+		<td>{{ account.email }}</td>
+    <td> {{ account.primaryPhone }}</td>
+		 <td><img src="{{ asset('bundles/UsersUserManage/images/login-icon.png') }}" width="25" height="20"> 
+     <a href = "{{path('_addaccount')}}/{{account.id}}" ><img src="{{ asset('bundles/UsersUserManage/images/edit-icon-u.png') }}" width="25" height="20"> </a>
+     <img class="delete_agent" src="{{ asset('bundles/UsersUserManage/images/delete-icon.png') }}" width="25" height="20" data-toggle="modal" data-target="#myModal" data-agent_id = "{{account.id}}" title='Inactivate account'></td>
+	  </tr>
+  {% endfor %}
+  
+  </tbody>
+</table>
+{% include "UsersUserManageBundle::pagination.html.twig" %}
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

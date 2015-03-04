@@ -1,0 +1,63 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+{% block content %}
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/account.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/jscolor.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#left_navigation_bg_color, #left_navigation_font_color, #left_navigation_font_size').change(function(){
+		set_theme();		
+	});
+	$('#left_navigation_bg_color, #left_navigation_font_color, #left_navigation_font_size').ready(function(){
+		set_theme();		
+	});
+	function set_theme(){		
+		$('.left-menu-section, #accordion h3').css( 'background-color', $( '#left_navigation_bg_color' ).val() );
+		$('.left-menu-section ul li a, .ui-state-default').css('color', $( '#left_navigation_font_color' ).val());
+		$('.ui-widget-content a, #accordion h3').css('font-size', $( '#left_navigation_font_size' ).val());
+	}	
+});
+</script>
+  <!--  start Mid-section Code -->
+  <div class="mid-section">
+    {# Including Side Bar  #}
+    {% include "UsersUserManageBundle::sidebar.html.twig" %}
+    <div class="right-panel">
+      <div class="heading">
+        <h1>Theme Setting</h1> 
+      </div>
+     <form action = "{{path('_pagetheme')}}" method = "post"  >
+      <div class="form-box">
+          <div class="col" style='border:0px solid #000000;width:87%'>
+              <div class="form-control">
+				  <label>Background Color</label>
+					<div class="ui-ctrl">
+						<input type= "text" name = "bg_color" class = "color" value = "{{bg_color}}" id="left_navigation_bg_color">
+					</div>
+					<div class="clear"></div>
+            </div> 
+           <div class="form-control">
+				  <label>Font Color</label>
+					<div class="ui-ctrl">
+						<input type= "text" name = "font_color" class = "color" value = "{{font_color}}" id = "left_navigation_font_color">
+					</div>
+					<div class="clear"></div>
+            </div> 
+           <div class="form-control">
+				  <label>Font Size</label>
+					<div class="ui-ctrl">
+						<input type= "text" name = "font_size" value = "{{font_size}}" id = "left_navigation_font_size">
+					</div>
+					<div class="clear"></div>
+            </div>
+      		<div align="right" style="padding-right:20px;"><input name="submit" type="submit" class="btn" value="Submit"></div>	
+          </div>
+        <div class="clear"></div>
+      </div>
+	  </form>
+    </div>  
+  </div>
+
+<!--  End Mid-section Code-->
+<div class="footer">© 2014 All Rights Reserved</div>
+</div>
+{% endblock %}

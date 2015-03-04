@@ -1,0 +1,61 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+{% block content %}
+ <div class="mid-section">
+{# Including Side Bar  #}
+   {% include "UsersUserManageBundle::sidebar.html.twig" %}
+    <div class="right-panel">
+       {{ form_start(form) }}
+       <div class="heading">
+        <h1>Add Signature</h1> 
+      </div>
+       <div class="form-box">
+         <div class="form-head">Signature Details</div>
+           
+             
+                {{ form_label(form.signatureTitle) }}
+                <div class="ui-ctrl">
+                {% if id > 0  %}
+                {{ form_widget(form.signatureTitle,{'value':signature.signatureTitle}) }}
+                 {% else %}
+                  {{ form_widget(form.signatureTitle) }}
+			 {% endif %}
+              </div>
+                <div class="clear"></div>
+             
+             
+            
+                {{ form_label(form.signature) }}
+                <div class="ui-ctrl">
+                  {% if id > 0  %}
+                    {{ form_widget(form.signature,{'value':signature.signature}) }}
+                     {% else %}
+                      {{ form_widget(form.signature) }}
+                 {% endif %}
+               </div>
+                <div class="clear"></div>
+                {{ form_label(form.signatureStatus) }}
+                <div class="ui-ctrl">
+                     {{ form_widget(form.signatureStatus) }}
+                </div>
+                <div class="clear"></div>
+             
+       <div class="clear"></div>          
+           <div class='agent_submit_button'>
+           {{ form_widget(form.id,{'value':id}) }}
+            {% if id > 0  %}    
+                {{ form_widget(form.Edit) }}  
+                  {% else %}  
+                    {{ form_widget(form.Save) }}
+            {% endif %}
+       
+        <div class="clear"></div>
+          </div>
+   </div>
+       {{ form_end(form) }}
+   </div>
+</div>
+
+<!--  End Mid-section Code-->
+<div class="footer">© 2014 All Rights Reserved</div>
+</div>
+{% endblock %}

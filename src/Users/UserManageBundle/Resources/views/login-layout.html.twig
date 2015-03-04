@@ -1,0 +1,62 @@
+  {% block head %}
+    <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+    {# bootstrap styles #}
+      <link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/bootstrap.min.css') }}" />
+    {# main styles #}
+    <link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/login-main-style.css') }}" />
+    <!--fonts-->
+<link rel="stylesheet" href="{{ asset('http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic') }}" />
+<!--fonts end-->
+<!--Responsive css -->
+<link rel="stylesheet" media="only all and (max-width: 1024px)" href="{{ asset('bundles/UsersUserManage/css/style_992.css') }}" />
+<link rel="stylesheet" media="only all and (max-width: 767px)" href="{{ asset('bundles/UsersUserManage/css/style_768.css') }}" />
+<link rel="stylesheet" media="only all and (max-width: 480px)" href="{{ asset('bundles/UsersUserManage/css/style_480.css') }}" />
+
+<!--Responsive css end -->
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/jquery.min.js') }}"></script>   
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/bootstrap.min.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/jquery.validate.js') }}"></script>
+<script>
+function popups()
+{
+alert("Checking Popup Settings");
+}
+
+function cookies()
+{
+alert("CONGRATS!! Your browser Cookies are enabled.");
+}
+</script>
+
+{% endblock %}
+
+{% block title 'Demo Bundle' %}
+
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-message">
+            <em>Notice</em>: {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% block content_header %}
+        <ul id="menu">
+            {% block content_header_more %}
+   
+            {% endblock %}
+        </ul>
+
+        <div style="clear: both"></div>
+    {% endblock %}
+
+    <div class="block">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% if code is defined %}
+        <h2>Code behind this page</h2>
+        <div class="block">
+            <div class="symfony-content">{</div>
+        </div>
+    {% endif %}
+{% endblock %}

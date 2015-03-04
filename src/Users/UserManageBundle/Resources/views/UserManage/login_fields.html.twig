@@ -1,0 +1,81 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+  {% block content %}
+  <script type="text/javascript">
+    var path = '{{path("checkusername", {"id": "2"})}}';
+   
+  </script>
+  <script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/reseller.js') }}"></script>
+   <!--  start Mid-section Code-->
+    <div class="mid-section">
+    {# Including Side Bar  #}
+    {% include "UsersUserManageBundle::sidebar.html.twig" %}
+    <div class="right-panel">
+      {{ form_start(form) }}
+      <div class="heading">
+        <h1>Reseller Information</h1>
+      </div>
+      <div class="form-box">
+        <div class="form-head">General Information</div>
+          <div class="col">
+            <div class="form-control">
+              <label>Salutation</label>
+                <div class="ui-ctrl">
+                   {{ form_widget(form.salutation) }}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-control height_40px">              
+              <label>First Name<span class="red">*</span></label>
+              <div class="ui-ctrl">              
+              {{ form_widget(form.first_name) }}
+              <span id='no_li_css'>{{ form_errors(form.first_name) }} </span>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="form-control height_40px">
+              <label>User Name<span class="red">*</span></label>
+              <div class="ui-ctrl">
+              {{ form_widget(form.username) }}
+              <span id='no_li_css'>{{ form_errors(form.username) }} </span>
+              </div>
+              <div class="clear"></div>
+            </div>            
+          </div>
+          <div class="col">
+            <div class="form-control height_31px">
+              <label></label><div class="ui-ctrl">&nbsp;</div>
+              <div class="clear"></div>
+            </div>
+            <div class="form-control height_40px">
+              <label>Last Name <span class="red">*</span></label>
+              <div class="ui-ctrl">
+              {{ form_widget(form.last_name) }}
+              <span id='no_li_css'>{{ form_errors(form.last_name) }} </span>
+              </div>
+              <div class="clear"></div>
+            </div>            
+            <div class="form-control">
+                <label>Password<span class="red">*</span></label>
+               <div class="ui-ctrl">
+                {{ form_widget(form.password) }}
+                <span id='no_li_css'>{{ form_errors(form.password) }} </span>
+               </div>
+              <div class="clear"></div>
+            </div>
+          </div>       
+          <div class="clear"></div>          
+          <div >
+               <div class='reseller_submit_button'>
+                {{ form_widget(form.Login) }}
+               </div>
+              <div class="clear"></div>
+            </div>
+          <div class="clear"></div>
+      </div>
+    {{ form_end(form) }}  
+</div>
+</div>
+<!--  End Mid-section Code-->
+<div class="footer">© 2014 All Rights Reserved</div>
+</div>
+{% endblock %}

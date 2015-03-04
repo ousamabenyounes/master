@@ -1,0 +1,31 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+ <thead>
+    <tr>   
+      <th scope="col">Title</th>
+      <th scope="col"  class = "fix_width">Action</th>
+    </tr>
+  </thead> 
+  
+ <tbody>
+   {% for signatures in signature %}
+	  <tr>		
+		<td>{{ signatures.signatureTitle }}</td>
+		
+		<td>
+                   
+            <a href = "{{path('manage_signature')}}/{{signatures.id}}"  title='Edit signature'>
+              <img src="{{ asset('bundles/UsersUserManage/images/edit-icon-u.png') }}" width="25" height="20"> 
+            </a>
+              <span class="glyphicon glyphicon-remove"></span>
+			  {% if signatures.signatureStatus == 1 %}
+              <img class="inactive_signature" src="{{ asset('bundles/UsersUserManage/images/delete-icon.png') }}" width="25" height="20" data-toggle="modal" data-target="#myModal" data-signature_id = "{{signatures.id}}" title='Inactivate signature'>
+				  {% else %}
+			<img class="active_signature" src="{{ asset('bundles/UsersUserManage/images/active-icon.png') }}" width="25" height="20" data-toggle="modal" data-target="#myModal" data-signature_id = "{{signatures.id}}" title='Activate signature'>
+           {% endif %}
+     </td>
+	  </tr>
+  {% endfor %}
+  </tbody> 
+</table>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

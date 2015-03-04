@@ -1,0 +1,42 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+ <thead>
+    <tr>   
+      <th scope="col">Last Name</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Date Added</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for flashMessage in app.session.flashbag.get('no_record_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+   {% for flashMessage in app.session.flashbag.get('record_insert_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+     {% for flashMessage in app.session.flashbag.get('record_update_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+     {% for flashMessage in app.session.flashbag.get('record_delete_message') %}
+        <tr > <td colspan='5' class = 'no_record_message' >{{ flashMessage }} </td></tr>
+    {% endfor %}
+    <tr ><td colspan='5' class = 'no_record_message' style= 'display:none'></td></tr>
+   {% for agent in agents %}
+	  <tr>		
+		<td> {{ agent.lastName }}</td>
+		<td> {{ agent.firstName }}</td>
+		<td> {{ agent.createdOn|date("m/d/Y") }}</td>
+		<td>{{ agent.email }}</td>
+		 <td><a href = "{{path('_loginas')}}/{{agent.id}}"><img src="{{ asset('bundles/UsersUserManage/images/login-icon.png') }}" width="25" height="20"></a> 
+     <a href = "{{path('_agentinfo')}}/{{agent.id}}" ><img src="{{ asset('bundles/UsersUserManage/images/edit-icon-u.png') }}" width="25" height="20"> </a>
+     <img class="delete_agent" src="{{ asset('bundles/UsersUserManage/images/delete-icon.png') }}" width="25" height="20" data-toggle="modal" data-target="#myModal" data-agent_id = "{{agent.id}}" title='Inactivate agent'>
+     <a href = "{{path('account_setting')}}/{{agent.accountId}}" ><img src="{{ asset('bundles/UsersUserManage/images/edit-icon-u.png') }}" width="25" height="20" title ="Edit account setting"> </a>
+	 </td>
+	  </tr>
+  {% endfor %}
+  
+  </tbody>
+</table>
+ {% include "UsersUserManageBundle::pagination.html.twig" %}
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

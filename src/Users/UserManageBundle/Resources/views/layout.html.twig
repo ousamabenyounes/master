@@ -1,0 +1,75 @@
+{#{% extends "TwigBundle::layout.html.twig" %}#}
+
+{% block head %}    
+
+<link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/reset.css') }}" />    
+<link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/main-style.css') }}" />    
+
+<link rel="stylesheet" media="only all and (min-width: 480px)" href="{{ asset('bundles/UsersUserManage/css/480.css') }}" />    
+<link rel="stylesheet" media="only all and (min-width: 768px)" href="{{ asset('bundles/UsersUserManage/css/768.css') }}" />    
+<link rel="stylesheet" media="only all and (min-width: 992px)"href="{{ asset('bundles/UsersUserManage/css/992.css') }}" /> 
+<link rel="stylesheet" media="only all and (min-width: 992px)"href="{{ asset('bundles/UsersUserManage/css/jquery-ui.css') }}" /> 
+
+
+   
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/jquery.validate.js') }}"></script>
+<!--script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/jquery-1.10.2.js') }}"></script-->
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/jquery-ui.js') }}"></script>
+
+
+<script type="text/javascript"> 
+    $(document).ready(function(){
+        $(".mobile-tab").click(function(){
+            $(".left-menu-section").toggleClass("hide-show");
+            $(".mobile-tab").toggleClass("btn-show");
+        });
+    });
+</script>
+ <script>
+$(function() {
+$( "#accordion" ).accordion();
+});
+</script>
+{% endblock %}
+
+{%   block title '' %}
+
+  {% block body %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}    
+      <div class="flash-message">
+      <em>Notice</em>: {{ flashMessage }}
+      </div>
+    {% endfor %}
+    
+    {% block content_header %}        
+        
+        {% block content_header_more %}
+          <div class="wraper">
+          <!--Start Header Code-->
+          <div class="header">
+		  <div class="logo">
+		  <img src="{{ asset('bundles/UsersUserManage/images/'~account_logo) }}" width="207" height="38">
+		  </div>              
+              <div class="masagebox">
+                <span class="con1">Contact Management for </span>
+                <span class="success">Successful</span>
+                <span class="real">Real Estate Agents and Brokers</span>
+              </div>
+          </div>
+          <!--  End Header Code-->
+        {% endblock %}
+    <div style="clear: both"></div>
+    {% endblock %}
+        <div class="block">
+        {% block content %}
+        {% endblock %}
+        </div>
+        {% if code is defined %}
+        <h2>Code behind this page</h2>
+        <div class="block">
+            <div class="symfony-content">{{ code|raw }}</div>
+        </div>
+        {% endif %}
+  {% endblock %}
+</body>

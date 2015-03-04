@@ -1,0 +1,166 @@
+
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+
+{% block content %}
+ 
+  <link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/bootstrap.css') }}" />
+  <!--link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/bootstrap-responsive.css') }}" />
+  <link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/bootstrap-responsive.min.css') }}" /-->
+  
+<script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/bootstrap.js') }}"></script>
+  <div class="mid-section">
+  {# Including Side Bar  #}
+  {% include "UsersUserManageBundle::sidebar.html.twig" %}
+    <div class="right-panel">       
+      <!--div class="heading"><h1>Reseller list</h1> </div-->
+      <div class="form-box">
+        <div class="form-head">Search</div>
+        <div class="search-wraper">
+          <select name="reseller_search_options" id='reseller_search_options' >
+              <option value='first_name' >First Name</option>
+              <option value='last_name' >Last Name</option>
+              <option value='email' >Email</option>
+          </select>
+          <input name="reseller_search_value" type="text" id="reseller_search_value">
+          <input name="search" type="button" value="Search" id='reseller_search' >
+        </div>
+        <div class="clear"></div>
+      </div>
+      
+      <div class="form-box">
+      <div  id = 'errors' class='alert alert-success hide'></div>
+        <div class="form-head add-agents-btn no_left_padding" >
+            <div >
+              <ul>          
+                <li ><a href="#" data-search_attr='1' class='reseller_tab_search default_tab' >Show Active</a></li>
+                <li><a href="#" data-search_attr='0' class='reseller_tab_search' >Show Inactive</a></li>          
+                <li><a href="#" data-search_attr='3' class='reseller_tab_search' >Show All</a></li>
+              </ul>
+            </div> 
+            <div class="padding_left_741px">
+              <ul>
+                <li class="add_reseller"><a href="{{path('resellerinfo')}}" >Add New Reseller</a></li>            
+              </ul>
+            </div>          
+            <div class="clear"></div>
+        </div>        
+        
+        <div class="data-table-wraper" id = 'reseller_details'></div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  <!--  End Mid-section Code-->
+  <div class="footer">© 2014 All Rights Reserved</div>
+
+
+   <script language="javascript" type="text/javascript">
+	var search_option = '';
+	var search_value = '';
+	var selected_tab = '1';
+	var page = '1';
+	$('.default_tab').addClass('selected_tab');
+    $(document).ready(function(){
+      
+		  list_resellers( search_option, search_value, selected_tab );
+		  $('#reseller_search').click(function(){
+			var search_option = $('#reseller_search_options').val();
+			var search_value = $.trim($('#reseller_search_value').val());
+			if(!search_value.length){
+				return false;
+			}
+			list_resellers(search_option,search_value,selected_tab);
+			
+		  });
+		  
+		  $(document ).on( "click",".paging", function(){
+          page = $(this).data('page');
+          list_resellers(search_option,search_value,selected_tab);
+		  });
+      
+		  $(document ).on( "change",".paging_select", function(){
+          page = $(this).val();
+          list_resellers(search_option,search_value,selected_tab);
+		  });
+      
+		  $('.reseller_tab_search').click(function(){
+      
+          $('.reseller_tab_search').removeClass('selected_tab').addClass('reseller_tab_search');	
+          $(this).addClass('selected_tab');						
+          selected_tab = $(this).data('search_attr');			
+          list_resellers(search_option,search_value,selected_tab);
+          
+		  });
+      $(document).on( "click",".delete_reseller", function(){
+          var reseller_id = $(this).data('reseller_id');
+          get_model_box(reseller_id);
+       });		  
+       $(document).on( "click","#delete_button", function(){
+          var inactive_id = $('#inactive_id').val();
+          inactive_record(inactive_id);
+       });
+       
+    });
+    
+   function inactive_record( inactive_id ){
+   
+   
+      var data = { 'id': inactive_id };
+      $.ajax({
+          url: '{{path("_inactive_user")}}',
+          type: 'POST',
+          data: data,
+          dataType: 'json',		 
+          beforeSend: function() {
+             $('#reseller_details').html('<div class="dvLoading">&nbsp;</div>');                        
+          },
+          success: function( data ) {   
+             if(data.Success){
+               $('#errors').show().html( data.Message );               
+             }
+             list_resellers(search_option,search_value,selected_tab);
+          },
+          error: function() {
+              $('#reseller_details').html('Currently we are unable to process your request');
+          },
+          complete: function() {
+          }
+        });
+   } 
+    
+    
+  function get_model_box(reseller_id){
+    var model_box = "<div id='myModal' class='modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><input type='hidden' name='inactive_id' id='inactive_id' value="+reseller_id+"><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button><h3 id='myModalLabel'>Inactive Reseller</h3></div><div class='modal-body'><p>Are you sure to inactive the record?</p></div><div class='modal-footer'><button class='btn' data-dismiss='modal' aria-hidden='true'>Close</button><button class='btn btn-danger' id='delete_button' data-dismiss='modal'>Delete</button></div></div>";
+    $("#myModal").html(model_box);
+  }  
+	function list_resellers(search_option,search_value,selected_tab){		
+		 var search_params = {'search_option': search_option,
+							  'search_value' : search_value,
+							  'selected_tab' : selected_tab,
+							  'status'       : '1',
+							  'page' 		     : page
+							  
+							 };
+		 					 
+		 $.ajax({
+          url: '{{path("_resellers", {"id": "2"})}}',
+          type: 'POST',
+          data: search_params,
+          dataType: 'html',		 
+          beforeSend: function() {
+             $('#reseller_details').html('<div class="dvLoading">&nbsp;</div>');                        
+          },
+          success: function( data,status ) {   
+             $('#reseller_details').html(data);
+          },
+          error: function() {
+              $('#reseller_details').html('Currently we are unable to process your request');
+          },
+          complete: function() {
+          }
+        });
+	}
+  </script>
+{% endblock %}
+

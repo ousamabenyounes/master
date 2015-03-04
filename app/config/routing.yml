@@ -1,0 +1,12 @@
+testingtesting:
+    resource: "@testingtestingBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+    
+users_user_manage:
+    resource: "@UsersUserManageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+

@@ -1,0 +1,78 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+{% block content %}
+<!--  start Mid-section Code -->
+<div class="mid-section">
+    {# Including Side Bar  #}
+    {% include "UsersUserManageBundle::sidebar.html.twig" %}  
+      <div class="right-panel">
+           <div class="heading">
+               <h1>Account Setting</h1> 
+           </div> 
+         <form action = "{{ path('account_setting', { 'id': id } ) }}" method = "post" >
+              <div class="form-box">
+                <div class="form-head">Custom School Setting</div>
+                  <div class="col" style='border:0px solid #000000;width:87%'>
+                      <div  style='border:0px solid #000000;width:100%'>
+                        <div class="ui-ctrl">
+                           <input type = "radio" name = "custom_school_setting" value = "1" 
+    {% if ( custom_school_setting is defined and custom_school_setting == 1 ) %} checked {% elseif custom_school_setting is not defined %}checked{% endif %} >Active
+                           <input type = "radio" name = "custom_school_setting" value = "0"
+     {% if ( custom_school_setting is defined and custom_school_setting == 0 ) %} checked {% endif %} >Inactive
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    <div >&nbsp;</div>
+                    <div>
+                      <div class="ui-ctrl" > </div>
+                      <div class="clear"></div>
+                    </div>             
+                  </div>
+                <div class="clear"></div>
+          </div>
+          <div class="form-box">
+                <div class="form-head">Syndication Feed Setting</div>
+                  <div class="col" style='border:0px solid #000000;width:87%'>
+                      <div  style='border:0px solid #000000;width:100%'>
+                        <div class="ui-ctrl">
+                           <input type = "radio" name = "syndication_feed_setting" value = "1" 
+{% if ( syndication_feed_setting is defined and syndication_feed_setting == 1 ) %} checked {% elseif syndication_feed_setting is not defined %}checked{% endif %}>Active
+                           <input type = "radio" name = "syndication_feed_setting" value = "0"
+  {% if ( syndication_feed_setting is defined and syndication_feed_setting == 0 ) %} checked {% endif %}>Inactive
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    <div >&nbsp;</div>
+                    <div>
+                      <div class="ui-ctrl" > </div>
+                      <div class="clear"></div>
+                    </div>             
+                  </div>
+                <div class="clear"></div>
+      </div>
+      <div class="form-box">
+                <div class="form-head">Activate Idx for Sites</div>
+                  <div class="col" style='border:0px solid #000000;width:87%'>
+                      <div  style='border:0px solid #000000;width:100%'>
+                        <div class="ui-ctrl">
+                           <input type = "checkbox" name = "site_idx_setting" value = "1">Active
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    <div >&nbsp;</div>
+                    <div>
+                      <div class="ui-ctrl" > </div>
+                      <div class="clear"></div>
+                    </div>             
+                  </div>
+                <div class="clear"></div>
+      </div>
+         <div class="clear"></div>              
+            <div align="right" style="padding-right:20px;">
+                <input name="" type="submit" class="btn" value="Submit">
+            </div>           
+         </form>   
+     </div>
+ </div>
+<!--  End Mid-section Code-->
+<div class="footer">© 2014 All Rights Reserved</div>
+{% endblock %}

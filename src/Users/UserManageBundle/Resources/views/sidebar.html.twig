@@ -1,0 +1,23 @@
+<script type="text/javascript">
+$(document).ready(function(){
+     	var bg_color = '{{bg_color}}';
+		var font_color = '{{font_color}}';
+		var font_size = '{{font_size}}' ;
+		$('.left-menu-section, #accordion h3').css( 'background-color', bg_color );
+		$('.left-menu-section ul li a, .ui-state-default').css( 'color', font_color );
+		$('.ui-widget-content a, #accordion h3').css( 'font-size', font_size );
+	
+});
+</script>
+<div class="mobile-tab">
+      <img src="{{ asset('bundles/UsersUserManage/images/mobile-tab.png') }}" width="30" height="31"></div>
+      <div class="left-menu-section">
+        <div class="heading" ><a href = "{{path('_logout')}}" >Sign Out</a></div>
+          {% if ( usertype is defined and usertype == 1 ) %}
+             {# Including admin Side Bar  #}
+            {%  include "UsersUserManageBundle::admin_sidebar.html.twig" %}
+          {% else %}
+             {# Including reseller Side Bar  #}
+            {%  include "UsersUserManageBundle::reseller_sidebar.html.twig" %}
+        {% endif %}
+</div>

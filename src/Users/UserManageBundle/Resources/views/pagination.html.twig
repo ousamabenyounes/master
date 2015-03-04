@@ -1,0 +1,55 @@
+{% if pages > 1 %}
+<table border='1' width='100%'>
+	<tr>
+	  <td class="demo">	
+	{% for page in range(1, pages) %}
+			{% if page == 1 %}
+			
+				{% if current_page > 1 %}
+					<a href='javascript:void(0);' class='paging cursor_pointer paging_text' data-page={{ page }} title="Got to first page"> &lt;&lt; </a>
+				{% else %}
+					<span class="paging_text_disable paging_text" title="Got to first page">&lt;&lt;</span>
+				{% endif %}
+				
+			{% endif %}
+			
+			{% if page < pages %}
+				{% if (page < pages and current_page > 1) %}
+					<a href='javascript:void(0);' class='paging paging_text' data-page={{ current_page-1 }} title="Got to previous page"> Previous </a>
+				{% else %}		
+					<span class="paging_text paging_text_disable" title="Got to previous page">Previous</span>
+				{% endif %}	
+					
+			{% endif %}
+			
+			{% if page == 1 %}	
+				<select class='paging_select'>
+			{% endif %}						
+					<option value={{ page }} {% if current_page == page %} selected='selected' {% endif %}	> {{ page }} </option>
+			{% if page == pages %}						
+				</select>
+			{% endif %}
+			
+			
+			{% if page > 1  %}
+				{% if current_page == pages %}
+					<span class="paging_text_disable" title="Got to next page">Next</span>
+				{% else %}	
+					<a href='javascript:void(0);' class='paging paging_text' data-page={{ current_page+1 }} title="Got to next page"> Next </a>
+				{% endif %}
+			{% endif %}
+			
+			{% if page == pages %}
+				{% if current_page != pages %}
+					<a href='javascript:void(0);' class='paging paging_text' data-page={{ page }} title="Got to last page"> &gt;&gt; </a>
+				{% else %}	
+					<span class="paging_text_disable" title="Got to last page">&gt;&gt;</span>
+				{% endif %}
+			{% endif %}
+			
+			
+	{% endfor %}
+	  </td>
+	</tr>
+</table>
+{% endif %}

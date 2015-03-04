@@ -1,0 +1,6 @@
+users_user_manage:
+    resource: "@UsersUserManageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+

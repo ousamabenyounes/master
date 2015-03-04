@@ -1,0 +1,13 @@
+.main-container {
+    margin: 0 auto;
+    width: 100%;
+}
+.login-contain{width:92%;}
+.login-contain .form-actions{padding:5% 7%;}
+.controle-panel {
+    margin: 3% auto;
+    width: 92%;
+}
+.controle-panel .span4{width:100%; margin:0 0 3% 0;}
+.modal{width:90%; }
+.modal.fade.in{top:3%;}

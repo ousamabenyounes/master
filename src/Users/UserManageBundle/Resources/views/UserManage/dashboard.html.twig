@@ -1,0 +1,26 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+  {% block content %}
+    <div class="mid-section">
+      {# Including Side Bar  #}
+      {% include "UsersUserManageBundle::sidebar.html.twig" %} 
+        <div class="right-panel">
+          <div class="heading"></div>
+            <div class="dashboard-box">
+              <div class="dashboard-head">Dashboard </div>
+			   {% if back_to_admin is defined and back_to_reseller is not defined %}
+			        <div><a href = "{{path('_loginas')}}/admin" >Admin<a></div>
+			  {% elseif back_to_admin is defined and back_to_reseller is defined %}
+			       <div><a href = "{{path('_loginas')}}/admin" >Admin<a>/<a href = "{{path('_loginas')}}/reseller">Reseller</a></div>
+			   {% endif %} 
+                {% if usertype is defined and usertype == 1%}
+                <div class = "dashboard_message" >Dashboard for admin </div>
+                {% elseif usertype == 2 %}
+                <div class = "dashboard_message" >Dashboard for reseller</div>
+                {% endif %}
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <!--  End Mid-section Code-->
+    <div class="footer">© 2014 All Rights Reserved</div>
+  {% endblock %}

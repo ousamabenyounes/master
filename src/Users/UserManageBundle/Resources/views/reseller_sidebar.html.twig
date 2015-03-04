@@ -1,0 +1,404 @@
+  <div id="accordion">
+        <h3>Setting</h3> 
+          <div style="height:100px !important;">
+            <ul>
+                {# <li><a href="{{path('_reseller_logo')}}">Reseller logo</a></li> #}
+                <li><a href="{{path('_pagetheme')}}">Page theming</a></li>
+				<li>
+				      <a href="{{path('_addaccount')}}/{{account_id}}">Update Account</a></li>
+				<li><a href="">Update Profile</a></li>
+				<li><a href="{{ path('password') }}">Change Password</a></li>
+                                {% if(usertype is defined and usertype == 4 ) %}
+                                    <li><a href="{{path('account_setting')}}/{{account_id}}">Account Setting</a></li>
+                                {% endif %}
+            </ul> 
+          </div> 
+        <h3>Signature</h3>
+          <div style="height:100px !important;">
+              <ul>
+                  <li><a href="{{path('manage_signature')}}">Add Default Signature</a></li>
+                  <li><a href="{{path('signatures')}}">Default Signatures</a></li>                  
+              </ul>
+          </div>
+      {% if ( agent_list is defined and agent_list == 1) %} 
+        <h3>Account</h3>
+          <div>
+            <ul> 
+              {% if ( agent_list_add_agent is defined and agent_list_add_agent == 1) %}
+                  <li><a href="{{path('_addaccount')}}">Add Account</a></li>
+              {% endif %}
+              
+              {% if ( agent_list_account_list is defined and agent_list_account_list == 1) %}  
+                  <li><a href="{{path('_accountlist')}}">Account List</a></li>
+              {% endif %}
+              
+              {% if ( agent_list_show_agent_list is defined and agent_list_show_agent_list == 1) %}
+                  <li><a href="{{path('_agentlist')}}">Agent List</a></li>
+              {% endif %}
+              
+              {% if ( agent_list_welcome_letter is defined and agent_list_welcome_letter == 1) %} 
+                  <li><a href="#">Welcome Letter</a></li>
+              {% endif %}
+              
+              {% if (agent_list_show_was_clients is defined and agent_list_show_was_clients == 1 ) %} 
+                  <li><a href="#">Show WAS clients</a></li>
+              {% endif %}
+              
+              {% if ( agent_list_show_kr_clients is defined and agent_list_show_kr_clients == 1) %}  
+                  <li><a href="#">Show KR clients</a></li>
+              {% endif %}
+            </ul>              
+          </div>
+      {% endif %}
+      
+      
+      {% if ( site_list is defined and site_list == 1) %}
+        <h3>Site</h3>
+          <div>
+            <ul>              
+              {% if ( site_list_add_site is defined and site_list_add_site == 1) %}
+                  <li><a href="#">Add Site</a></li>
+              {% endif %}
+              
+              {% if ( site_list_show_site_list is defined and site_list_show_site_list == 1) %}
+                  <li><a href="#">Site List</a></li>
+              {% endif %}
+              
+              {% if ( site_list_list_custom_templates is defined and site_list_list_custom_templates == 1) %}
+                  <li><a href="#">List Custom Templates</a></li>
+              {% endif %}
+              
+              {% if ( site_list_new_custom_template is defined and site_list_new_custom_template == 1) %}
+                  <li><a href="#">New Custom Temlate</a></li>
+              {% endif %}
+
+                  <li><a href="#">List Property Templates</a></li>
+              {% if ( site_list_new_property_template is defined and site_list_new_property_template == 1) %}
+                  <li><a href="#">New Property Template</a></li>
+              {% endif %}
+              
+              {% if ( site_list_list_theme_templates is defined and site_list_list_theme_templates == 1) %}
+                  <li><a href="#">List Theme Template</a></li>
+              {% endif %}
+              
+              {% if ( site_list_site_visitor_and_form_states is defined and site_list_site_visitor_and_form_states == 1) %}
+                  <li><a href="#">Site Visitor & Form Stats</a></li>
+              {% endif %}
+              
+              {% if ( site_list_list_focus_sites is defined and site_list_list_focus_sites == 1) %}
+                  <li><a href="#">List Focus Sites</a></li>
+              {% endif %}
+              
+              {% if ( site_list_client_custom_focus_site is defined and site_list_client_custom_focus_site == 1) %}
+                  <li><a href="#">Client Custom Focus Site</a></li>
+              {% endif %}
+              
+              {% if ( site_list_add_focus is defined and site_list_add_focus == 1) %}
+                  <li><a href="#">Add Focus Site</a></li>
+              {% endif %}
+            </ul>
+          </div>   
+      {% endif %}
+
+      {% if ( mortgage_broker_list is defined and mortgage_broker_list == 1) %}
+        <h3>Mortgage Broker</h3>
+          <div>
+            <ul>
+              {% if ( mortgage_broker_list_show_mortgage is defined and mortgage_broker_list_show_mortgage == 1) %}
+                  <li><a href="#">Mortgage List</a></li>
+              {% endif %}            
+              
+              {% if ( mortgage_broker_list_add_mortgage_broker is defined and mortgage_broker_list_add_mortgage_broker == 1) %}
+                  <li><a href="#">Add Mortgage Broker</a></li>
+              {% endif %}            
+              
+              {% if ( mortgage_broker_list_show_mortgage_broker_list is defined and mortgage_broker_list_show_mortgage_broker_list == 1) %}
+                  <li><a href="#">Mortgage Broker List</a></li>
+              {% endif %}
+              
+              {% if ( mortgage_broker_list_welcome_letter is defined and mortgage_broker_list_welcome_letter == 1) %}
+                  <li><a href="#">Welcome Letter</a></li>
+              {% endif %}            
+            </ul>
+          </div>  
+      {% endif %}
+      
+      {% if ( default_agent_settings is defined and default_agent_settings == 1) %}
+          <h3>Default Agent Settings</h3>
+            <div>     
+              <ul>
+                {% if ( default_agent_settings_default_html_headers is defined and default_agent_settings_default_html_headers == 1) %}
+                  <li><a href="#">Default HTML Headers</a></li>
+                {% endif %}
+                
+                {% if ( default_agent_settings_add_agent_html_hdr is defined and default_agent_settings_add_agent_html_hdr == 1) %}
+                  <li><a href="#">Add Agent HTML Hdr</a></li>
+                {% endif %}
+                
+                {% if ( default_agent_settings_default_signatures is defined and default_agent_settings_default_signatures == 1) %}
+                  <li><a href="#">Default Signatures</a></li>
+                {% endif %}
+                
+                {% if ( default_agent_settings_add_agent_signature is defined and default_agent_settings_add_agent_signature == 1) %}
+                  <li><a href="#">Add Agent Signature</a></li>
+                {% endif %}
+              </ul>
+            </div>    
+      {% endif %}
+     
+      {% if ( follow_up_camp is defined and follow_up_camp == 1) %}
+          <h3>Follow Up Camp.</h3>
+              <div>
+                  <ul>
+                      {% if ( follow_up_camp_add_campaign_email is defined and follow_up_camp_add_campaign_email == 1) %}
+                        <li><a href="#">Add Campaign Email</a></li>
+                      {% endif %}
+                      
+                      {% if ( follow_up_camp_list_email_templates is defined and follow_up_camp_list_email_templates == 1) %}
+                        <li><a href="#">List Email Templates</a></li>            
+                      {% endif %}
+                  </ul>
+              </div>
+      {% endif %}
+
+      {% if ( email_blast is defined and email_blast == 1) %}
+          <h3>Email Blast</h3>
+            <div>
+              <ul>            
+                {% if ( email_blast_send_to_all_agents is defined and email_blast_send_to_all_agents == 1) %}
+                    <li><a href="#">Send to All Agents</a></li>
+                {% endif %}
+                
+                {% if ( email_blast_send_individual_email is defined and email_blast_send_individual_email == 1) %}
+                  <li><a href="#">Send Individual Email</a></li>
+                {% endif %}
+                
+                {% if ( email_blast_manage_default_grps is defined and email_blast_manage_default_grps == 1) %}
+                  <li><a href="#">Manage Default Grps</a></li>
+                {% endif %}
+              </ul>
+            </div>  
+      {% endif %}
+      
+      {% if ( newsletters is defined and newsletters == 1) %}
+          <h3>Newsletters</h3>
+          <div>
+              <ul>
+                {% if ( newsletters_add_newsletter is defined and newsletters_add_newsletter == 1) %}
+                    <li><a href="#">Add Newsletter</a></li>
+                {% endif %}
+                
+                {% if ( newsletters_newsletter_defaults is defined and newsletters_newsletter_defaults == 1) %}
+                    <li><a href="#">Newsletter Defaults</a></li>            
+                {% endif %}
+              </ul>
+          </div>  
+      {% endif %}
+      
+      {% if ( statistics is defined and statistics == 1) %}
+          <h3>Statistics</h3>
+          <div>
+            <ul>           
+                {% if ( statistics_bulk_outgoing_emails is defined and statistics_bulk_outgoing_emails == 1) %}
+                    <li><a href="#">Bulk Outgoing Emails</a></li>
+                {% endif %}
+                
+                {% if ( statistics_virtual_tour_space is defined and statistics_virtual_tour_space == 1) %}
+                    <li><a href="#">Virtual Tour Space</a></li>
+                {% endif %}
+                
+                {% if ( statistics_ip_blocking is defined and statistics_ip_blocking == 1) %}
+                    <li><a href="#">IP Blocking</a></li>
+                {% endif %}
+            </ul>
+          </div>   
+      {% endif %}
+      
+      {% if ( default_surveys is defined and default_surveys == 1) %}
+        <h3>Default Surveys</h3>
+        <div>
+          <ul>            
+            {% if ( default_surveys_add_default_survey is defined and default_surveys_add_default_survey == 1) %}
+                <li><a href="#">Add Default Survey</a></li>            
+            {% endif %}
+          </ul>
+        </div>  
+      {% endif %}
+      
+      {% if ( documents is defined and documents == 1) %}
+          <h3>Documents</h3>
+          <div>
+              <ul>        
+                  {% if ( documents_add_document is defined and documents_add_document == 1) %}
+                    <li><a href="#">Add Document</a></li>
+                  {% endif %}
+              </ul>
+          </div>
+      {% endif %}
+      
+      {% if ( form_templates is defined and form_templates == 1) %}
+          <h3>Form Templates</h3> 
+            <div>
+              <ul>        
+                {% if ( form_templates_add_form_templates is defined and form_templates_add_form_templates == 1) %}            
+                  <li><a href="#">Add Form Template</a></li>
+                {% endif %}
+                
+                {% if ( form_templates_list_form_templates is defined and form_templates_list_form_templates == 1) %}   
+                  <li><a href="#">List Form Templates</a></li>
+                {% endif %}            
+              </ul>
+            </div>
+      {% endif %}
+      
+      {% if ( idx_setup_items is defined and idx_setup_items == 1) %}
+          <h3>IDX Setup Items</h3>
+          <div>
+            <ul>           
+              {% if ( idx_setup_items_idx_feed_template is defined and idx_setup_items_idx_feed_template == 1) %}
+                <li><a href="#">IDX Feed Template</a></li>
+              {% endif %}
+              
+              {% if ( idx_setup_items_idx_reports is defined and idx_setup_items_idx_reports == 1) %}
+                <li><a href="#">IDX Reports</a></li>
+              {% endif %}
+              
+              {% if ( idx_setup_items_edit_alert_mail is defined and idx_setup_items_edit_alert_mail == 1) %}
+                <li><a href="#">Edit Alert Mail</a></li>
+              {% endif %}
+              
+              {% if ( idx_setup_items_edit_viewing_sche_mail is defined and idx_setup_items_edit_viewing_sche_mail == 1) %}
+                <li><a href="#">Edit Viewing Sche. Mail</a></li>
+              {% endif %}
+            </ul>
+          </div>  
+      {% endif %}
+      
+      {% if ( transfer_process is defined and transfer_process == 1) %}
+        <h3>Transfer Process</h3>
+        <div>
+          <ul>            
+            {% if ( transfer_process_apg_db_transfer is defined and transfer_process_apg_db_transfer == 1) %}
+              <li><a href="#">APG - DB Transfer</a></li>
+            {% endif %}
+            {% if ( transfer_process_focus_site_transfer is defined and transfer_process_focus_site_transfer == 1) %}
+              <li><a href="#">Focus Site Transfer</a></li>            
+            {% endif %}
+          </ul>
+        </div>
+      {% endif %}
+      
+      {% if ( site_setup_items is defined and site_setup_items == 1) %}
+          <h3>Site Setup Items</h3>
+          <div>
+            <ul>
+              {% if ( site_setup_items_admin_log is defined and site_setup_items_admin_log == 1) %}
+                <li><a href="#">Admin Log</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_auto_scan_settings is defined and site_setup_items_auto_scan_settings == 1) %}
+                <li><a href="#">Auto Scan Settings</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_admin_auto_scan_report is defined and site_setup_items_admin_auto_scan_report == 1) %}
+                <li><a href="#">Admin Auto Scan Report</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_list_report_templates is defined and site_setup_items_list_report_templates == 1) %}
+                <li><a href="#">List Report Templates</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_popup_windows is defined and site_setup_items_popup_windows == 1) %}
+                <li><a href="#">Popup Windows</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_add_report is defined and site_setup_items_add_report == 1) %}
+                <li><a href="#">Add Report</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_add_framed_report is defined and site_setup_items_add_framed_report == 1) %}
+                <li><a href="#">Add Framed Report</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_add_custom_page is defined and site_setup_items_add_custom_page == 1) %}
+                <li><a href="#">Add Custom Page</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_add_external_link is defined and site_setup_items_add_external_link == 1) %}
+                <li><a href="#">Add External Link</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_add_form is defined and site_setup_items_add_form == 1) %}
+                <li><a href="#">Add Form</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_default_form_groups is defined and site_setup_items_default_form_groups == 1) %}
+                <li><a href="#">Default Form Groups</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_property_lists_options is defined and site_setup_items_property_lists_options == 1) %}
+                <li><a href="#">Property Lists Options</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_default_meta_tags is defined and site_setup_items_default_meta_tags == 1) %}
+                <li><a href="#">Default Meta Tags</a></li>
+              {% endif %}
+              
+              {% if ( site_setup_items_edit_light_dark_footer is defined and site_setup_items_edit_light_dark_footer == 1) %}
+                <li><a href="#">Edit Light/Dark Footer</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        {% endif %}
+        
+        {% if ( admin_settings is defined and admin_settings == 1) %}
+          <h3>Admin Settings</h3>
+          <div>
+              <ul>            
+                {% if ( admin_settings_list_admin_signatures is defined and admin_settings_list_admin_signatures == 1) %}
+                    <li><a href="#">List Admin Signatures</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_add_admin_signature is defined and admin_settings_add_admin_signature == 1) %}
+                    <li><a href="#">Add Admin Signature</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_education_tab_settings is defined and admin_settings_education_tab_settings == 1) %}
+                    <li><a href="#">Education Tab Settings</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_focus_site_tab_settings is defined and admin_settings_focus_site_tab_settings == 1) %}
+                    <li><a href="#">Focus Site Tab Settings</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_manage_admin_users is defined and admin_settings_manage_admin_users == 1) %}
+                    <li><a href="#">Manage Admin Users</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_manage_admin_logs is defined and admin_settings_manage_admin_logs == 1) %}
+                    <li><a href="#">Manage Admin Logs</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_property_detail_text is defined and admin_settings_property_detail_text == 1) %}
+                    <li><a href="#">Property Detail Text</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_domain_forwarding is defined and admin_settings_domain_forwarding == 1) %}
+                    <li><a href="#">Domain Forwarding</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_crawlers is defined and admin_settings_crawlers == 1) %}
+                    <li><a href="#">Crawlers</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_change_page_contents is defined and admin_settings_change_page_contents == 1) %}
+                    <li><a href="#">Change Page Contents</a></li>
+                {% endif %}
+                
+                {% if ( admin_settings_update_pop_content is defined and admin_settings_update_pop_content == 1) %}
+                    <li><a href="#">Update Pop Content</a></li>            
+                {% endif %}
+              </ul>
+          </div>
+        {% endif %}
+</div>

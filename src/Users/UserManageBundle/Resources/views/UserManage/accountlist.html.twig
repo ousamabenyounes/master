@@ -1,0 +1,150 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+
+{% block content %}
+ <link rel="stylesheet" href="{{ asset('bundles/UsersUserManage/css/bootstrap.css') }}" />
+  <script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/bootstrap.js') }}"></script>
+<div class="mid-section">
+    {# Including Side Bar  #}
+   {% include "UsersUserManageBundle::sidebar.html.twig" %}
+   <div class="right-panel">
+    <!--div class="heading"><h1>Account list</h1></div-->      
+    <div class="form-box">
+      <div class="form-head">Search</div>
+      <div class="search-wraper">
+        <select name="account_search_options" id='account_search_options' >
+          <option value='name' >Company Name</option>
+          <option value='email' >Email</option>
+        </select>
+          <input name="account_search_value" type="text" id="account_search_value">
+          <input name="search" type="button" value="Search" id='account_search' >
+      </div>
+        <div class="clear"></div>
+    </div>    
+    <div class="form-box">
+      <div class="form-head add-agents-btn no_left_padding" >
+            <div >
+              <ul>          
+                  <li ><a href="#" data-search_attr='1' class='account_tab_search default_tab' >Show Active</a></li>
+                  <li><a href="#" data-search_attr='0' class='account_tab_search' >Show Inactive</a></li>          
+                  <li><a href="#" data-search_attr='3' class='account_tab_search' >Show All</a></li>
+              </ul>
+            </div>                
+            <div class="clear"></div>
+        </div>
+      <!--div class="form-head"> Add New Account</div-->
+      <div class="data-table-wraper" id = 'account_details'> </div>
+      <div class="clear"></div>
+    </div>
+   </div>
+  </div>
+    <!--  End Mid-section Code-->
+  <div class="footer">© 2014 All Rights Reserved</div>
+  </div>
+   <script language="javascript" type="text/javascript">
+   var search_option = '';
+   var search_value = '';
+   var selected_tab = '1';
+   var page = '1';
+    $('.default_tab').addClass('selected_tab');
+     $(document).ready(function (){
+       list_accounts( search_option, search_value, selected_tab );
+        $('#account_search').click(function(){
+        var search_option = $('#account_search_options').val();
+        var search_value = $.trim($('#account_search_value').val());
+        if(!search_value.length){
+				  return false;
+			 }
+       list_accounts(search_option,search_value,selected_tab);
+      });
+      $(document ).on( "click",".paging", function(){
+			page = $(this).data('page');			
+			list_accounts(search_option,search_value,selected_tab);
+		  });
+      $(document ).on( "change",".paging_select", function(){
+			page = $(this).val();
+			list_accounts(search_option,search_value,selected_tab);
+		  });
+      $('.account_tab_search').click(function(){
+         $('.account_tab_search').removeClass('selected_tab').addClass('account_tab_search');	
+         $(this).addClass('selected_tab');
+         selected_tab = $(this).data('search_attr');	
+         list_accounts(search_option,search_value,selected_tab);
+       });
+	   
+	   
+	   $(document).on( "click",".delete_agent", function(){
+          var agent_id = $(this).data('agent_id');
+          get_model_box(agent_id);
+       });
+	   
+       $(document).on( "click","#delete_button", function(){
+          var inactive_id = $('#inactive_id').val();
+          inactive_record(inactive_id);
+       });
+       
+       
+     });
+   function inactive_record( inactive_id ) { 
+     var param = {'id': inactive_id 
+                 };	 
+             $.ajax({
+               url : '{{path("_inactive_account")}}',
+               type: 'POST',
+               data: param,           
+                dataType: 'json',
+                beforeSend: function() {
+                     $('#account_details').html('<div class="dvLoading">&nbsp;</div>');        
+                 },
+              success: function( data ) {
+                  if(data.Success){
+                   $('#errors').show().html( data.Message );               
+                }
+                list_accounts(search_option,search_value,selected_tab);
+              }, 
+              
+             error: function() {
+                  $('#account_details').html('Currently we are unable to process your request');
+              },
+            complete: function(data) {
+              }          
+           });
+    
+   }
+
+    function get_model_box(account_id){
+    var model_box = "<div id='myModal' class='modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><input type='hidden' name='inactive_id' id='inactive_id' value="+account_id+"><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button><h3 id='myModalLabel'>Inactive Account</h3></div><div class='modal-body'><p>Are you sure to inactive the record?</p></div><div class='modal-footer'><button class='btn' data-dismiss='modal' aria-hidden='true'>Close</button><button class='btn btn-danger' id='delete_button' data-dismiss='modal'>Delete</button></div></div>";
+    $("#myModal").html(model_box);
+  } 
+
+  
+     function list_accounts( search_option,search_value,selected_tab ) {
+          var search_params = {'search_option': search_option,
+							  'search_value' : search_value,
+							  'selected_tab' : selected_tab,
+							  'status'       : '1',
+                              'usertype'     : '4',
+							  'page' 		     : page
+							  
+							 };
+     
+      $.ajax({
+        url : '{{path("_accounts")}}',
+        type: 'POST',
+        data: search_params,
+        dataType: 'html',
+        beforeSend: function() {
+             $('#account_details').html('<div class="dvLoading">&nbsp;</div>');                        
+          },
+        success: function( data ) {    
+              $('#account_details').html(data);
+             
+          },
+        error: function() {
+              $('#account_details').html('Currently we are unable to process your request');
+          },
+        complete: function() {
+          }
+      });
+    }
+   </script>
+{% endblock %}

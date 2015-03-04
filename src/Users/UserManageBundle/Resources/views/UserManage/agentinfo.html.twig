@@ -1,0 +1,158 @@
+{% extends "UsersUserManageBundle::layout.html.twig" %}
+  {% block content %}
+  <script type="text/javascript" src="{{ asset('bundles/UsersUserManage/js/agent.js') }}"></script>
+   <!--  start Mid-section Code-->
+  <div class="mid-section">
+    {# Including Side Bar  #}
+    {% include "UsersUserManageBundle::sidebar.html.twig" %}
+    <div class="right-panel">
+    {{ form_start(form) }}
+      <div class="heading">
+        <h1>Add Agent</h1> 
+      </div>
+      <div class="form-box">
+        <div class="form-head">General Details</div>
+          <div class="col">
+            <div class="form-control">
+              <label>Salutation</label>
+                <div class="ui-ctrl">
+                    {% if id > 0  %}
+                      {{ form_widget(form.salutation,{'value':agent.salutation}) }}
+                    {% else %}
+                      {{ form_widget(form.salutation) }}
+                    {% endif %}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-control">              
+              <label>First Name<span class="red">*</span></label>
+              <div class="ui-ctrl">
+              {% if id > 0  %}
+                {{ form_widget(form.first_name,{'value':agent.firstName} ) }}
+                {% else %}  
+                {{ form_widget(form.first_name) }}
+              {% endif %}
+               <span id='no_li_css'>{{ form_errors(form.first_name) }} </span>
+              </div>
+              <div class="clear"></div>
+            </div>
+            
+             <div class="form-control ">
+              <label>Email<span class="red">*</span></label>
+              <div class="ui-ctrl">
+                {% if id > 0  %}
+              {{ form_widget( form.email ,{'value':agent.email} ) }}
+              {% else %}  
+                {{ form_widget(form.email) }}
+              {% endif %}
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="form-control ">
+              <label>Primary Phone<span class="red">*</span></label> 
+              <div class="ui-ctrl">
+                {% if id > 0  %}
+              {{ form_widget(form.primary_phone  ,{'value':agent.primaryPhone}) }}
+              {% else %}  
+                {{ form_widget(form.primary_phone) }}
+              {% endif %}
+              </br><span class = "help_text">Number will display on agent site</span>
+              <span id='no_li_css'>{{ form_errors(form.primary_phone) }} </span>
+              </div>
+              <div class="clear"></div>
+            </div>
+
+             {% if not id %}
+              <div class="form-control height_40px">
+                <label>User Name<span class="red">*</span></label>
+                <div class="ui-ctrl"> 
+                  {{ form_widget(form.username) }}
+               <span id='no_li_css'>{{ form_errors(form.username) }} </span>
+                </div>
+                <div class="clear"></div>
+               </div>   
+            	{% endif %}
+          </div>
+          <div class="col">
+            <div class="form-control">
+                 {{ form_label(form.title)}}
+                 <div class="ui-ctrl">
+                  {% if id > 0  %}
+                 {{ form_widget(form.title,{'value':agent.title})}}
+                  {% else %}  
+                {{ form_widget(form.title) }}
+              {% endif %}
+                 </div>
+                  <div class="clear"></div>
+            </div>
+            <div class="form-control ">
+              <label>Last Name <span class="red">*</span></label>
+              <div class="ui-ctrl">
+               {% if id > 0  %}
+              {{ form_widget(form.last_name,{'value':agent.lastName})}}
+               {% else %}  
+                {{ form_widget(form.last_name) }}
+              {% endif %}
+              <span id='no_li_css'>{{ form_errors(form.last_name) }} </span>
+              </div>
+              <div class="clear"></div>
+            </div>     
+            
+            <div class="form-control ">
+                {{ form_label(form.email2)}}
+                <div class="ui-ctrl">
+                 {% if id > 0  %}
+                {{ form_widget(form.email2,{'value':agent.email2}) }} 
+                {% else %}  
+                {{ form_widget(form.email2) }}
+              {% endif %}
+                </div>
+              <div class="clear"></div>
+            </div>
+             
+              <div class="form-control ">
+                {{ form_label(form.phone2)}}
+                <div class="ui-ctrl">
+                 {% if id > 0  %}
+                {{ form_widget(form.phone2,{'value':agent.phone2}) }}
+                {% else %}  
+                {{ form_widget(form.phone2) }}
+              {% endif %}
+                </div>
+              <div class="clear"></div>
+            </div>
+              {% if not id %}
+            <div class="form-control ">
+                <label>Password<span class="red">*</span></label>
+                <div class="ui-ctrl">
+                {{ form_widget(form.password) }} 
+                <span id='no_li_css'>{{ form_errors(form.password) }} </span>               
+               </div>
+              <div class="clear"></div>
+            </div>
+            {%endif%}
+            </div>
+          <div class="clear"></div>          
+          <div class='col'>&nbsp;</div>
+          <div class='col'>
+               <div class='agent_submit_button'>
+               {{ form_widget(form.id,{'value':id}) }}
+                {% if id > 0  %}    
+                {{ form_widget(form.Edit) }}  
+                 {% else %}  
+                {{ form_widget(form.Save) }}
+                 {% endif %}
+               </div>
+              <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          </div>       
+ 
+      {{ form_end(form) }}
+    </div>  
+  </div>
+</div>
+<!--  End Mid-section Code-->
+</div>
+<div class="footer">© 2014 All Rights Reserved</div>
+{% endblock %}

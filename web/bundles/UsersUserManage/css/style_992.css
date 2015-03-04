@@ -1,0 +1,16 @@
+
+.main-container {
+    margin: 0 auto;
+    width: 100%;
+}
+.controle-panel {
+    margin: 30px auto 0;
+    width: 97%;
+}
+
+.controle-panel .span4 {
+    margin: 0 0 5% 1%;
+    padding: 10px 15px;
+    width: 24.2%;
+}
+.modal{width:60%; height:200px}
